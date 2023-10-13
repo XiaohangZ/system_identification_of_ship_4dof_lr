@@ -1,0 +1,44 @@
+{
+  "settings": {
+    "time_delta": 1.0,
+    "window_size": 60,
+    "horizon_size": 60,
+    "session": {
+      "total_runs_for_best_models": 3
+    },
+    "control_names": [
+    "n","deltal","deltar","Vw","alpha_x","alpha_y","phi"
+    ],
+    "state_names": [
+     "u","v","p","r"
+    ],
+    "tracker": {},
+    "additional_tests": {},
+    "target_metric": "nrmse",
+    "metrics": {
+      "nrmse": {
+        "metric_class": "deepsysid.metrics.NormalizedRootMeanSquaredErrorMetric",
+        "parameters": {}
+      }
+    }
+  },
+  "models": [
+    {
+      "model_base_name": "FrigatePINN_4dof_lr",
+      "model_class": "deepsysid.models.pinn.Frigate_4dof_lr.FrigatePINNModel_4dof_lr",
+      "static_parameters": {
+        "inputNode": 7,
+        "outputNode": 4,
+        "sequence_length": 50,
+        "batch_size": 128,
+        "epochs": 400,
+        "loss": "mse"
+      },
+      "flexible_parameters": {
+        "learning_rate": [0.001],
+        "hiddenNode": [256],
+        "alpha": [0]
+      }
+    }
+  ]
+}
